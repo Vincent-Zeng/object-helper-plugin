@@ -33,7 +33,7 @@ public class BuilderObjectCopyStrategy extends AbstractObjectCopyStrategy {
     @Override
     protected String generatePrefix() {
         return generateNullCheck(sourceParamName) + LINE_SEPARATOR +
-                "return" + BLANK_SEPARATOR + getPsiClassName(targetClass) + ".builder()" + LINE_SEPARATOR;
+                LINE_SEPARATOR + "final " + getPsiClassName(targetClass) + " target = " + getPsiClassName(targetClass) + ".builder()" + LINE_SEPARATOR;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class BuilderObjectCopyStrategy extends AbstractObjectCopyStrategy {
 
     @Override
     protected String generateSuffix() {
-        return ".build();" + LINE_SEPARATOR;
+        return ".build();" + LINE_SEPARATOR + LINE_SEPARATOR + "return target;" + LINE_SEPARATOR;
     }
 
     /**
