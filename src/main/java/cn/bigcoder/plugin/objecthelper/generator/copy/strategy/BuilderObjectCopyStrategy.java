@@ -38,7 +38,7 @@ public class BuilderObjectCopyStrategy extends AbstractObjectCopyStrategy {
 
     @Override
     protected String generateFiledCopy(PsiField field) {
-        return "." + field.getName() + "("
+        return ".with" + StringUtils.firstUpperCase(field.getName()) + "("
                 + sourceParamName + ".get" + StringUtils.firstUpperCase(field.getName()) + "())"
                 + LINE_SEPARATOR;
     }
@@ -55,6 +55,6 @@ public class BuilderObjectCopyStrategy extends AbstractObjectCopyStrategy {
      * @return
      */
     private String generateNullCheck(String sourceParamName) {
-        return "if(" + sourceParamName + "==null){return null;}";
+        return "if(null == " + sourceParamName + "){return null;}";
     }
 }
